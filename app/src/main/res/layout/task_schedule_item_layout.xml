@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <LinearLayout
+        android:id="@+id/task_list_item_time_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="5/21" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/task_list_item_progress_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/task_list_item_time_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/task_list_item_progress_bar"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/base_color" />
+
+        <ImageView
+            android:id="@+id/task_list_item_progress_status"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/task_list_item_status_yes" />
+
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/base_color" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/task_list_item_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/task_list_item_progress_layout"
+        android:layout_marginLeft="20dp"
+        android:layout_centerVertical="true"
+        android:text="这是一个任务的内容，这是一个任务的内容，这是一个任务的内容"
+        android:layout_marginRight="10dp"/>
+
+</RelativeLayout>

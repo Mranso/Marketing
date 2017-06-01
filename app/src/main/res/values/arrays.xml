@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string-array name="task_titles">
+        <item>每日任务</item>
+        <item>每周任务</item>
+        <item>每月任务</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_boss_score"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.control.marketing.widget.TopBarView
+        android:id="@+id/boss_score_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
+    <ListView
+        android:id="@+id/boss_score_list_view"
+        android:layout_below="@id/boss_score_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
