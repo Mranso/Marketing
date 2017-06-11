@@ -6,6 +6,6 @@
     <color name="base_color">#1C86EE</color>
     <color name="tab_content_text_normal">#929292</color>
     <color name="white">#FFFFFF</color>
-    <color name="gray_light">#DFDFDF</color>
+    <color name="gray_light">#EFEFEF</color>
     <color name="font_black">#313233</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.control.marketing.maintab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Process;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import com.control.marketing.message.MessageFragment;
 import com.control.marketing.R;
 import com.control.marketing.task.TaskFragment;
-import com.control.marketing.UserFragment;
+import com.control.marketing.user.UserFragment;
 import com.control.marketing.common.BaseActivity;
 import com.control.marketing.widget.NoScrollViewPager;
 
@@ -30,6 +31,11 @@ public class MainActivity extends BaseActivity {
     private RadioGroup radioGroup;
     private Context context;
     private long firstTime = 0;
+
+    public static void start(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

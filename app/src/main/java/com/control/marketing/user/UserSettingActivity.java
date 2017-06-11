@@ -1,9 +1,10 @@
-package com.control.marketing;
+package com.control.marketing.user;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.control.marketing.R;
 import com.control.marketing.common.BaseActivity;
 import com.control.marketing.widget.TopBarView;
 

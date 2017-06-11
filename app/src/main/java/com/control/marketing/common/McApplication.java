@@ -8,6 +8,19 @@ import io.rong.imlib.RongIMClient;
 
 public class McApplication extends Application {
 
+    private static McApplication application;
+
+    public McApplication() {
+        application = this;
+    }
+
+    public static synchronized McApplication getInstance() {
+        if (application == null) {
+            application = new McApplication();
+        }
+        return application;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

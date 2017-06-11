@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_user_setting"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/gray_light">
 
     <com.control.marketing.widget.TopBarView
         android:id="@+id/user_setting_top_bar"
@@ -15,6 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user_setting_top_bar"
         android:layout_marginTop="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -25,7 +28,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="账号安全" />
+            android:text="修改密码" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -40,6 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user_setting_account_layout"
         android:layout_marginTop="1dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:background="@color/white"
         android:orientation="horizontal">
 

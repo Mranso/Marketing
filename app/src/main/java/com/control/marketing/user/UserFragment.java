@@ -1,4 +1,4 @@
-package com.control.marketing;
+package com.control.marketing.user;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.control.marketing.R;
 import com.control.marketing.common.BaseFragment;
 import com.control.marketing.widget.TopBarView;
 
