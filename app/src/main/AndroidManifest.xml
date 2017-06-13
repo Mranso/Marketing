@@ -30,7 +30,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <!-- imlib config begin -->
         <meta-data
             android:name="RONG_CLOUD_APP_KEY"
@@ -94,11 +93,10 @@
             </intent-filter>
         </receiver>
 
-
         <activity
             android:name=".maintab.MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".message.ChartActivity"
             android:screenOrientation="portrait"
@@ -128,6 +126,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".user.UpdatePasswordActivity" />
+        <activity android:name=".user.AppInfoActivity"></activity>
     </application>
 
 </manifest>

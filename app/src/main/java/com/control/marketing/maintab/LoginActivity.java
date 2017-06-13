@@ -1,6 +1,7 @@
 package com.control.marketing.maintab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,11 @@ public class LoginActivity extends BaseActivity {
     private CheckBox rememberPasswordView;
     private Button loginView;
     private Context context;
+
+    public static void start(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
