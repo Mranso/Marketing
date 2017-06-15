@@ -49,7 +49,7 @@ public class TaskScheduleFragment extends BaseFragment {
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddTaskActivity.start(context);
+                AddTaskActivity.startForResult(getActivity(), 201);
             }
         });
     }

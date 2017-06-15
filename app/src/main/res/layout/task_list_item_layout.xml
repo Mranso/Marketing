@@ -7,7 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/task_list_item_bg"
         android:orientation="vertical">
 
@@ -20,17 +22,19 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_weight="1"
+                android:id="@+id/task_list_item_time"
                 android:layout_width="0dp"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
                 android:text="2017-5-21" />
 
             <ImageView
+                android:id="@+id/task_list_item_status"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/task_list_item_status_yes"/>
+                android:background="@drawable/task_list_item_status_yes" />
 
         </LinearLayout>
 
@@ -38,27 +42,42 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
-            android:background="@color/base_color" />
+            android:background="@color/gray_light" />
 
         <TextView
+            android:id="@+id/task_list_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="这是任务的标题"/>
+            android:text="这是任务的标题"
+            android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，"/>
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/task_list_item_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text="这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，这是任务内容，"
+                android:textSize="14sp" />
 
+            <ImageView
+                android:id="@+id/task_list_item_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
     </LinearLayout>
-
 
 </LinearLayout>

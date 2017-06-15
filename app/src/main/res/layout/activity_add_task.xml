@@ -84,8 +84,8 @@
     <Button
         android:id="@+id/add_task_submit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
         android:background="@drawable/mc_button_blue_background"
         android:text="提交"
         android:textColor="@color/white" />

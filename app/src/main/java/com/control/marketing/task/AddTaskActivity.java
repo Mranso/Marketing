@@ -1,5 +1,6 @@
 package com.control.marketing.task;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +11,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.GridView;
+import android.widget.Toast;
 
 import com.control.marketing.R;
 import com.control.marketing.common.BaseActivity;
+import com.control.marketing.model.TaskBean;
 import com.control.marketing.widget.FullGridView;
 import com.control.marketing.widget.TopBarView;
 
@@ -25,7 +27,9 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class AddTaskActivity extends BaseActivity {
 
-    public static final int REQUEST_IMAGE = 1;
+    public static final int REQUEST_IMAGE = 100;
+    public static final int REQUEST_CODE = 200;
+    public static final String INTENT_KEY_NEW_TASK = "INTENT_KEY_NEW_TASK";
 
     private TopBarView topBarView;
     private Button selectedTimeButton, submitButton;
@@ -39,9 +43,9 @@ public class AddTaskActivity extends BaseActivity {
     private AddTaskImageGridViewAdapter addTaskImageGridViewAdapter;
     private List<String> imageUrls = new ArrayList<>();
 
-    public static void start(Context context) {
-        Intent intent = new Intent(context, AddTaskActivity.class);
-        context.startActivity(intent);
+    public static void startForResult(Activity activity, int requestCode) {
+        Intent intent = new Intent(activity, AddTaskActivity.class);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -76,7 +80,7 @@ public class AddTaskActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 int year = datePicker.getYear();
-                int month = datePicker.getMonth();
+                int month = datePicker.getMonth() + 1;
                 int day = datePicker.getDayOfMonth();
                 selectedTimeButton.setText(year + " - " + month + " - " + day);
                 timeSelectDialog.dismiss();
@@ -96,6 +100,42 @@ public class AddTaskActivity extends BaseActivity {
                 }
             }
         });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String time = selectedTimeButton.getText().toString();
+                String title = taskTitleView.getText().toString();
+                String content = taskContentView.getText().toString();
+                imageUrls.remove(AddTaskImageGridViewAdapter.DEFAULT_IMAGE_URL);
+
+                if ("选择时间".equals(time) || time.isEmpty()) {
+                    Toast.makeText(context, "请选择时间", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (title.isEmpty()) {
+                    Toast.makeText(context, "请输入标题", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (content.isEmpty()) {
+                    Toast.makeText(context, "请输入内容", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                TaskBean taskBean = new TaskBean();
+                taskBean.setTime(time);
+                taskBean.setTitle(title);
+                taskBean.setContent(content);
+                taskBean.setImages(imageUrls);
+                taskBean.setFinish(false);
+
+                Intent intent = new Intent();
+                intent.putExtra(INTENT_KEY_NEW_TASK, taskBean);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
     }
 
     @Override
