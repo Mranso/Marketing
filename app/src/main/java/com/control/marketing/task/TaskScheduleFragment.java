@@ -13,8 +13,7 @@ import android.widget.TextView;
 import com.control.marketing.R;
 import com.control.marketing.common.BaseFragment;
 import com.control.marketing.model.TaskBean;
-
-import org.w3c.dom.Text;
+import com.control.marketing.task.everydayplan.AddTaskActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;

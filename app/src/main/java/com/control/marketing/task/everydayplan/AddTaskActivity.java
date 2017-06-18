@@ -1,4 +1,4 @@
-package com.control.marketing.task;
+package com.control.marketing.task.everydayplan;
 
 import android.app.Activity;
 import android.app.AlertDialog;

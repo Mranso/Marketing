@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TaskViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private String[] categoryName = new String[]{"日程", "进度", "排名"};
+    private String[] categoryName = new String[]{"日计划", "周计划", "月计划"};
     private ArrayList<Fragment> fragmentArrayList;
 
     public TaskViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragmentArrayList) {

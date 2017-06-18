@@ -1,4 +1,4 @@
-package com.control.marketing.task;
+package com.control.marketing.task.monthplan;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,12 +22,12 @@ import java.util.List;
  * version: 2.0.0
  */
 
-public class TaskListAdapter extends BaseAdapter {
+public class MonthPlanListAdapter extends BaseAdapter {
 
     private Context context;
     private List<TaskBean> taskBeanList = new ArrayList<>();
 
-    public TaskListAdapter(Context context) {
+    public MonthPlanListAdapter(Context context) {
         this.context = context;
     }
 
@@ -55,7 +55,7 @@ public class TaskListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         TaskListItemViewHolder taskListItemViewHolder;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.task_list_item_layout, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.month_plan_list_item_layout, viewGroup, false);
             taskListItemViewHolder = new TaskListItemViewHolder();
             taskListItemViewHolder.taskTime = (TextView) view.findViewById(R.id.task_list_item_time);
             taskListItemViewHolder.taskStatus = (ImageView) view.findViewById(R.id.task_list_item_status);

@@ -1,4 +1,4 @@
-package com.control.marketing.task;
+package com.control.marketing.task.everydayplan;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.control.marketing.R;
@@ -19,15 +18,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TaskListFragment extends BaseFragment {
+public class EverydayPlanListFragment extends BaseFragment {
 
     private Context context;
-    private Spinner spinner;
     private TextView addTask;
     private ListView listView;
 
     private List<TaskBean> taskBeanList = new ArrayList<>();
-    private TaskListAdapter taskListAdapter;
+    private EverydayPlanListAdapter everydayPlanListAdapter;
 
     @Nullable
     @Override
@@ -50,7 +48,7 @@ public class TaskListFragment extends BaseFragment {
         if (resultCode == -1 && requestCode == AddTaskActivity.REQUEST_CODE) {
             TaskBean taskBean = (TaskBean) data.getSerializableExtra(AddTaskActivity.INTENT_KEY_NEW_TASK);
             taskBeanList.add(0, taskBean);
-            taskListAdapter.refreshData(taskBeanList);
+            everydayPlanListAdapter.refreshData(taskBeanList);
         }
     }
 
@@ -65,12 +63,11 @@ public class TaskListFragment extends BaseFragment {
     }
 
     private void initView(View view) {
-        spinner = (Spinner) view.findViewById(R.id.task_list_spinner);
         addTask = (TextView) view.findViewById(R.id.task_list_add_task);
         listView = (ListView) view.findViewById(R.id.task_list_list_view);
 
-        taskListAdapter = new TaskListAdapter(context);
-        listView.setAdapter(taskListAdapter);
+        everydayPlanListAdapter = new EverydayPlanListAdapter(context);
+        listView.setAdapter(everydayPlanListAdapter);
     }
 
     private void initData() {
@@ -83,6 +80,6 @@ public class TaskListFragment extends BaseFragment {
             taskBean.setFinish(true);
             taskBeanList.add(taskBean);
         }
-        taskListAdapter.refreshData(taskBeanList);
+        everydayPlanListAdapter.refreshData(taskBeanList);
     }
 }

@@ -16,7 +16,7 @@ public class UserFragment extends BaseFragment {
 
     private Context context;
     private TopBarView topBarView;
-    private LinearLayout userInfoView, bossScoreView, userSettingView;
+    private LinearLayout userInfoView, bossScoreView, userSettingView, userPlanTopView;
 
     @Nullable
     @Override
@@ -53,12 +53,20 @@ public class UserFragment extends BaseFragment {
                 UserSettingActivity.start(context);
             }
         });
+
+        userPlanTopView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlanTopActivity.start(context);
+            }
+        });
     }
 
     private void initView(View view) {
         userInfoView = (LinearLayout) view.findViewById(R.id.user_fragment_user_info);
         bossScoreView = (LinearLayout) view.findViewById(R.id.user_fragment_boss_score);
         userSettingView = (LinearLayout) view.findViewById(R.id.user_fragment_user_setting);
+        userPlanTopView = (LinearLayout) view.findViewById(R.id.user_fragment_my_top);
         topBarView = (TopBarView) view.findViewById(R.id.user_fragment_top_bar);
         topBarView.setTopBarTitle("我的");
     }

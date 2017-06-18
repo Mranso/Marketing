@@ -102,7 +102,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".task.AddTaskActivity"
+            android:name=".task.everydayplan.AddTaskActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
@@ -126,8 +126,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".user.UpdatePasswordActivity" />
-        <activity android:name=".user.AppInfoActivity"></activity>
+        <activity
+            android:name=".user.UpdatePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.AppInfoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".user.PlanTopActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

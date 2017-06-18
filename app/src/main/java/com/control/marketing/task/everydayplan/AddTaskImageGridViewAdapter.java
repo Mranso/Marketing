@@ -1,4 +1,4 @@
-package com.control.marketing.task;
+package com.control.marketing.task.everydayplan;
 
 import android.content.Context;
 import android.content.Intent;

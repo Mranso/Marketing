@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.control.marketing.R;
 import com.control.marketing.common.BaseFragment;
+import com.control.marketing.task.everydayplan.EverydayPlanListFragment;
+import com.control.marketing.task.monthplan.MonthPlanListFragment;
+import com.control.marketing.task.weekplan.WeekPlanListFragment;
 import com.control.marketing.widget.PagerSlidingTabStrip;
 import com.control.marketing.widget.TopBarView;
 
@@ -39,15 +42,15 @@ public class TaskFragment extends BaseFragment {
         pagerSlidingTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.task_fragment_sliding_tab);
 
         TopBarView topBarView = (TopBarView) view.findViewById(R.id.task_fragment_top_bar);
-        topBarView.setTopBarTitle("日程");
+        topBarView.setTopBarTitle("计划");
     }
 
     private void initFragment() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(new TaskListFragment());
-        fragmentArrayList.add(new TaskScheduleFragment());
-        fragmentArrayList.add(new TaskTopFragment());
+        fragmentArrayList.add(new EverydayPlanListFragment());
+        fragmentArrayList.add(new WeekPlanListFragment());
+        fragmentArrayList.add(new MonthPlanListFragment());
         TaskViewPagerAdapter taskViewPagerAdapter = new TaskViewPagerAdapter(fragmentManager, fragmentArrayList);
         viewPager.setOffscreenPageLimit(fragmentArrayList.size() - 1);
         viewPager.setAdapter(taskViewPagerAdapter);

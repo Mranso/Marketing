@@ -1,4 +1,4 @@
-package com.control.marketing.task;
+package com.control.marketing.user;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,16 +20,16 @@ import java.util.List;
  * version: 2.0.0
  */
 
-public class TaskTopAdapter extends BaseAdapter {
+public class PlanTopAdapter extends BaseAdapter {
 
     private Context context;
     private List<UserBean> taskBeanList = new ArrayList<>();
 
-    public TaskTopAdapter(Context context){
+    public PlanTopAdapter(Context context) {
         this.context = context;
     }
 
-    public void refreshData(List<UserBean> taskBeanList){
+    public void refreshData(List<UserBean> taskBeanList) {
         this.taskBeanList = taskBeanList;
         notifyDataSetChanged();
     }
