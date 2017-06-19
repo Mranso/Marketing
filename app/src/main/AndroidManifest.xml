@@ -132,10 +132,10 @@
         <activity
             android:name=".user.AppInfoActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".user.PlanTopActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".task.weekplan.AddWeekPlanActivity"></activity>
     </application>
 
 </manifest>

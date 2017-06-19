@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.control.marketing.R;
 import com.control.marketing.common.BaseFragment;
 import com.control.marketing.model.TaskBean;
+import com.control.marketing.model.WeekPlanBean;
 import com.control.marketing.task.everydayplan.AddTaskActivity;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class WeekPlanListFragment extends BaseFragment {
     private TextView addTask;
     private ListView listView;
 
-    private List<TaskBean> taskBeanList = new ArrayList<>();
+    private List<WeekPlanBean> weekPlanBeanList = new ArrayList<>();
     private WeekPlanListAdapter weekPlanListAdapter;
 
     @Nullable
@@ -39,7 +40,7 @@ public class WeekPlanListFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         context = getActivity();
         initView(view);
-        initData();
+        initWeekPlanData();
         initListener();
     }
 
@@ -47,9 +48,9 @@ public class WeekPlanListFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == -1 && requestCode == AddTaskActivity.REQUEST_CODE) {
-            TaskBean taskBean = (TaskBean) data.getSerializableExtra(AddTaskActivity.INTENT_KEY_NEW_TASK);
-            taskBeanList.add(0, taskBean);
-            weekPlanListAdapter.refreshData(taskBeanList);
+            WeekPlanBean weekPlanBean = (WeekPlanBean) data.getSerializableExtra(AddTaskActivity.INTENT_KEY_NEW_TASK);
+            weekPlanBeanList.add(0, weekPlanBean);
+            weekPlanListAdapter.refreshData(weekPlanBeanList);
         }
     }
 
@@ -57,7 +58,7 @@ public class WeekPlanListFragment extends BaseFragment {
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddTaskActivity.class);
+                Intent intent = new Intent(getContext(), AddWeekPlanActivity.class);
                 startActivityForResult(intent, AddTaskActivity.REQUEST_CODE);
             }
         });
@@ -71,8 +72,9 @@ public class WeekPlanListFragment extends BaseFragment {
         listView.setAdapter(weekPlanListAdapter);
     }
 
-    private void initData() {
-        for (int i = 0; i < 2; i++) {
+    private List<TaskBean> initTaskListData() {
+        List<TaskBean> taskBeanList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
             TaskBean taskBean = new TaskBean();
             taskBean.setTitle("这是一个任务的标题");
             taskBean.setContent("这是一个任务的内容，这是一个任务的内容,,这是一个任务的内容,这是一个任务的内容,这是一个任务的内容这是一个任务的内容,这是一个任务的内容,这是一个任务的内容这是一个任务的内容,这是一个任务的内容,这是一个任务的内容");
@@ -81,6 +83,19 @@ public class WeekPlanListFragment extends BaseFragment {
             taskBean.setFinish(true);
             taskBeanList.add(taskBean);
         }
-        weekPlanListAdapter.refreshData(taskBeanList);
+        return taskBeanList;
+    }
+
+    private void initWeekPlanData() {
+        for (int i = 0; i < 2; i++) {
+            WeekPlanBean weekPlanBean = new WeekPlanBean();
+            weekPlanBean.setWeekTime("2017-6-18");
+            weekPlanBean.setFinish(false);
+            weekPlanBean.setWeekContent("这是一个任务的内容，这是一个任务的内容,这是一个任务的内容,这是一个任务的内容,这是一个任务的内容这是一个任务的内容,这是一个任务的内容,这是一个任务的内容这是一个任务的内容,这是一个任务的内容,这是一个任务的内容");
+            weekPlanBean.setWeekTitle("这是一个任务的标题");
+            weekPlanBean.setWeekPlans(initTaskListData());
+            weekPlanBeanList.add(weekPlanBean);
+        }
+        weekPlanListAdapter.refreshData(weekPlanBeanList);
     }
 }
