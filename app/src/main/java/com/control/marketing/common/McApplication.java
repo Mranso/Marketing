@@ -3,8 +3,23 @@ package com.control.marketing.common;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.view.View;
 
+import java.util.List;
+
+import io.rong.imageloader.core.DisplayImageOptions;
+import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
+import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.widget.provider.RealTimeLocationMessageProvider;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.ipc.RongExceptionHandler;
+import io.rong.imlib.model.UserInfo;
+import io.rong.push.RongPushClient;
+import io.rong.push.common.RongException;
 
 public class McApplication extends Application {
 
@@ -28,9 +43,8 @@ public class McApplication extends Application {
          * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIMClient 的进程和 Push 进程执行了 init。
          * io.rong.push 为融云 push 进程名称，不可修改。
          */
-        if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext())) ||
-                "io.rong.push".equals(getCurProcessName(getApplicationContext()))) {
-            RongIMClient.init(this);
+        if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
+            RongIM.init(this);
         }
     }
 
