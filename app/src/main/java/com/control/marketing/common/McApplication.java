@@ -3,23 +3,11 @@ package com.control.marketing.common;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.text.TextUtils;
-import android.view.View;
 
-import java.util.List;
+import com.control.marketing.message.McReceiveMessageListener;
 
-import io.rong.imageloader.core.DisplayImageOptions;
-import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
-import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
-import io.rong.imkit.widget.provider.RealTimeLocationMessageProvider;
 import io.rong.imlib.RongIMClient;
-import io.rong.imlib.ipc.RongExceptionHandler;
-import io.rong.imlib.model.UserInfo;
-import io.rong.push.RongPushClient;
-import io.rong.push.common.RongException;
 
 public class McApplication extends Application {
 
@@ -45,6 +33,7 @@ public class McApplication extends Application {
          */
         if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
             RongIM.init(this);
+            RongIMClient.setOnReceiveMessageListener(new McReceiveMessageListener());
         }
     }
 

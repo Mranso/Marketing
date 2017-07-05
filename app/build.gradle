@@ -47,6 +47,7 @@ dependencies {
     compile project(':IMKit')
     compile project(':CallKit')
     compile project(':RedPacket')
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
 
 repositories { flatDir { dirs 'aars' } }

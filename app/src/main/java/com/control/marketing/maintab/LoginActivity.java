@@ -8,11 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.control.marketing.R;
 import com.control.marketing.common.BaseActivity;
+import com.control.marketing.common.McApplication;
 import com.control.marketing.utils.SharedPreferencesUtils;
 import com.control.marketing.utils.StatusBarUtils;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
 public class LoginActivity extends BaseActivity {
 
@@ -21,7 +26,7 @@ public class LoginActivity extends BaseActivity {
     private Button loginView;
     private Context context;
 
-    public static void start(Context context){
+    public static void start(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
@@ -40,13 +45,18 @@ public class LoginActivity extends BaseActivity {
         loginView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String account = accountView.getText().toString();
+                String password = passwordView.getText().toString();
+                if (account.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(context, "请输入账号或密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                initRongCloud(account);
                 SharedPreferencesUtils.getInstance().putBoolean(SharedPreferencesUtils.SP_LOGIN_REMEMBER_PASSWORD_AND_ACCOUNT, rememberPasswordView.isChecked());
                 if (rememberPasswordView.isChecked()) {
-                    SharedPreferencesUtils.getInstance().putString(SharedPreferencesUtils.SP_LOGIN_ACCOUNT, accountView.getText().toString());
-                    SharedPreferencesUtils.getInstance().putString(SharedPreferencesUtils.SP_LOGIN_PASSWORD, passwordView.getText().toString());
+                    SharedPreferencesUtils.getInstance().putString(SharedPreferencesUtils.SP_LOGIN_ACCOUNT, account);
+                    SharedPreferencesUtils.getInstance().putString(SharedPreferencesUtils.SP_LOGIN_PASSWORD, password);
                 }
-                MainActivity.start(context);
-                finish();
             }
         });
     }
@@ -64,6 +74,40 @@ public class LoginActivity extends BaseActivity {
         if (!spAccountString.isEmpty() && spCheckboxStatus) {
             accountView.setText(spAccountString);
             passwordView.setText(spPasswordString);
+        }
+    }
+
+    private void initRongCloud(String account) {
+        String token = "";
+        if ("111111".equals(account)) {
+            token = "OMAJy2mFMHzd4nn/H1UtQxSuRgh3bHYa2IvH6oyU0ArfGIsdXPC+hwQILviu/hR2+a1KIJpzkAccX7+dksMLXA==";
+        } else if ("222222".equals(account)) {
+            token = "+h3D5l6BbVHjCYUTTsI0C4rwFcIqBfflUFxqMr53IWGh6GuHOde6OXjZGuGAAl0mbWHvLIc0hNPPHvGE2l3YcA==";
+        }
+        connect(token);
+    }
+
+    private void connect(String token) {
+
+        if (getApplicationInfo().packageName.equals(McApplication.getCurProcessName(getApplicationContext()))) {
+
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+                @Override
+                public void onTokenIncorrect() {
+
+                }
+
+                @Override
+                public void onSuccess(String userid) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            });
         }
     }
 }

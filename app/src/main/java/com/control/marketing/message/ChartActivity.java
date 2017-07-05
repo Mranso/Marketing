@@ -14,6 +14,10 @@ import com.control.marketing.common.BaseActivity;
 import com.control.marketing.model.MessageBean;
 import com.control.marketing.widget.TopBarView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +40,17 @@ public class ChartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+        EventBus.getDefault().register(this);
         context = this;
         initView();
         initData();
         initListener();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initView() {
@@ -53,6 +64,13 @@ public class ChartActivity extends BaseActivity {
     private void initTopBar() {
         topBarView.setTopBarTitle("朱俊铭");
         topBarView.setTopBarLeftVisibility(true);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoonEvent(MessageBean messageBean) {
+        messageBeanList.add(messageBean);
+        chartListAdapter.refreshData(messageBeanList);
+        listView.setSelection(chartListAdapter.getCount() - 1);
     }
 
     private void initListener() {

@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
     private void initFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(initConversationList());
+        fragmentArrayList.add(new MessageFragment());
         fragmentArrayList.add(new TaskFragment());
         fragmentArrayList.add(new UserFragment());
         FragmentPageViewAdapter fragmentPageViewAdapter = new FragmentPageViewAdapter(fragmentManager, fragmentArrayList);
