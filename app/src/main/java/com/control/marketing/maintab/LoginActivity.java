@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.control.marketing.R;
 import com.control.marketing.common.BaseActivity;
 import com.control.marketing.common.McApplication;
+import com.control.marketing.model.UserBean;
+import com.control.marketing.model.UserInfoMessage;
 import com.control.marketing.utils.SharedPreferencesUtils;
 import com.control.marketing.utils.StatusBarUtils;
 
@@ -98,7 +100,18 @@ public class LoginActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onSuccess(String userid) {
+                public void onSuccess(String userId) {
+                    UserBean userBean = new UserBean();
+                    if ("111111".equals(userId)) {
+                        userBean.setId(userId);
+                        userBean.setName("用户一");
+                        userBean.setHeaderIcon("http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=f0c5c08030d3d539c16807c70fb7c566/8ad4b31c8701a18bbef9f231982f07082838feba.jpg");
+                    } else {
+                        userBean.setId(userId);
+                        userBean.setName("用户二");
+                        userBean.setHeaderIcon("http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg");
+                    }
+                    UserInfoMessage.cacheUserInfo(userBean);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }

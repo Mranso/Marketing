@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.control.marketing.R;
 import com.control.marketing.common.BaseActivity;
 import com.control.marketing.model.MessageBean;
+import com.control.marketing.model.UserBean;
+import com.control.marketing.model.UserInfoMessage;
+import com.control.marketing.utils.TimeUtils;
 import com.control.marketing.widget.TopBarView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,8 +24,15 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.imlib.IRongCallback;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
+import io.rong.message.TextMessage;
+
 public class ChartActivity extends BaseActivity {
 
+    private static final String INTENT_KEY_USER_BEAN = "INTENT_KEY_USER_BEAN";
     private Context context;
     private TopBarView topBarView;
     private ListView listView;
@@ -30,9 +40,11 @@ public class ChartActivity extends BaseActivity {
     private Button sendButton;
     private List<MessageBean> messageBeanList = new ArrayList<>();
     private ChartListAdapter chartListAdapter;
+    private UserBean toUserBean;
 
-    public static void start(Context context) {
+    public static void start(Context context, UserBean userBean) {
         Intent intent = new Intent(context, ChartActivity.class);
+        intent.putExtra(INTENT_KEY_USER_BEAN, userBean);
         context.startActivity(intent);
     }
 
@@ -62,12 +74,13 @@ public class ChartActivity extends BaseActivity {
     }
 
     private void initTopBar() {
-        topBarView.setTopBarTitle("朱俊铭");
         topBarView.setTopBarLeftVisibility(true);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMoonEvent(MessageBean messageBean) {
+        messageBean.setName(toUserBean.getName());
+        messageBean.setUserIcon(toUserBean.getHeaderIcon());
         messageBeanList.add(messageBean);
         chartListAdapter.refreshData(messageBeanList);
         listView.setSelection(chartListAdapter.getCount() - 1);
@@ -94,45 +107,51 @@ public class ChartActivity extends BaseActivity {
                     Toast.makeText(context, "请输入文字", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if ("111111".equals(UserInfoMessage.getUserId())) {
+                    sendTextMessage(sendContent, "222222");
+                } else {
+                    sendTextMessage(sendContent, "111111");
+                }
+            }
+        });
+    }
+
+    private void sendTextMessage(final String messageContent, final String toUserId) {
+        TextMessage textMessage = TextMessage.obtain(messageContent);
+        RongIMClient.getInstance().sendMessage(Conversation.ConversationType.PRIVATE, toUserId, textMessage, null, null, new IRongCallback.ISendMessageCallback() {
+            @Override
+            public void onAttached(Message message) {
+                // 消息成功存到本地数据库的回调
+            }
+
+            @Override
+            public void onSuccess(Message message) {
+                // 消息发送成功的回调
                 MessageBean messageBean = new MessageBean();
-                messageBean.setFromUser("111");
-                messageBean.setMessageContent(sendContent);
+                messageBean.setFromUser(UserInfoMessage.getUserId());
+                messageBean.setToUser(toUserId);
+                messageBean.setMessageContent(messageContent);
                 messageBean.setMessageType(2);
-                messageBean.setMessageTime("2017-5-16");
-                messageBean.setName("姓名");
-                messageBean.setUserIcon("http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=f0c5c08030d3d539c16807c70fb7c566/8ad4b31c8701a18bbef9f231982f07082838feba.jpg");
+                messageBean.setMessageTime(TimeUtils.getDateString(message.getSentTime()));
+                messageBean.setName(UserInfoMessage.getUserName());
+                messageBean.setUserIcon(UserInfoMessage.getUserIcon());
                 messageBeanList.add(messageBean);
                 chartListAdapter.refreshData(messageBeanList);
                 listView.setSelection(chartListAdapter.getCount() - 1);
                 editText.setText("");
             }
+
+            @Override
+            public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+                // 消息发送失败的回调
+            }
         });
     }
 
     private void initData() {
-        messageBeanList.clear();
-        for (int i = 0; i < 5; i++) {
-            if (i % 2 == 1) {
-                MessageBean messageBean = new MessageBean();
-                messageBean.setFromUser("111");
-                messageBean.setMessageContent("你好，我是工作人员");
-                messageBean.setMessageType(1);
-                messageBean.setMessageTime("2017-5-16");
-                messageBean.setName("姓名");
-                messageBean.setUserIcon("http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=f0c5c08030d3d539c16807c70fb7c566/8ad4b31c8701a18bbef9f231982f07082838feba.jpg");
-                messageBeanList.add(messageBean);
-            } else {
-                MessageBean messageBean = new MessageBean();
-                messageBean.setToUser("000");
-                messageBean.setMessageContent("你好，我是用户");
-                messageBean.setMessageType(2);
-                messageBean.setMessageTime("2017-5-16");
-                messageBean.setName("姓名");
-                messageBean.setUserIcon("http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=f0c5c08030d3d539c16807c70fb7c566/8ad4b31c8701a18bbef9f231982f07082838feba.jpg");
-                messageBeanList.add(messageBean);
-            }
-        }
-
+        Intent intent = getIntent();
+        toUserBean = (UserBean) intent.getSerializableExtra(INTENT_KEY_USER_BEAN);
+        topBarView.setTopBarTitle(toUserBean.getName());
         chartListAdapter = new ChartListAdapter(context, messageBeanList);
         listView.setAdapter(chartListAdapter);
     }

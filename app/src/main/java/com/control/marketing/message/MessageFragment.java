@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.control.marketing.R;
 import com.control.marketing.common.BaseFragment;
 import com.control.marketing.model.UserBean;
+import com.control.marketing.model.UserInfoMessage;
 import com.control.marketing.widget.TopBarView;
 
 import java.util.ArrayList;
@@ -63,20 +64,23 @@ public class MessageFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ChartActivity.start(context);
+                ChartActivity.start(context, userBeanList.get(i));
             }
         });
     }
 
     private void initData() {
-        for (int i = 0; i < 50; i++) {
-            UserBean userBean = new UserBean();
-            userBean.setName("朱俊铭");
-            userBean.setHeaderIcon("http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=f0c5c08030d3d539c16807c70fb7c566/8ad4b31c8701a18bbef9f231982f07082838feba.jpg");
-            userBean.setLastMessage("你好，这是最后一条消息");
-            userBean.setLsatMessageTime("2017-5-10");
-            userBeanList.add(userBean);
+        UserBean userBean = new UserBean();
+        if("111111".equals(UserInfoMessage.getUserId())){
+            userBean.setName(UserInfoMessage.getUserName());
+            userBean.setHeaderIcon(UserInfoMessage.getUserIcon());
+        }else {
+            userBean.setName("用户二");
+            userBean.setHeaderIcon("http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg");
         }
+        userBean.setLastMessage("你好，这是最后一条消息");
+        userBean.setLsatMessageTime("2017-5-10");
+        userBeanList.add(userBean);
         swipeRefreshLayout.setRefreshing(false);
         messageListAdapter.refreshData(userBeanList);
     }

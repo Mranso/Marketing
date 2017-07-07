@@ -5,13 +5,6 @@ import android.content.SharedPreferences;
 
 import com.control.marketing.common.McApplication;
 
-/**
- * description:
- * author: yuantian
- * date: 2017/6/9
- * version: 2.0.0
- */
-
 public class SharedPreferencesUtils {
 
     private static final String SP_NAME = "SP_MC";
