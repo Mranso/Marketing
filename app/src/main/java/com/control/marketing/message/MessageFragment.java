@@ -72,11 +72,11 @@ public class MessageFragment extends BaseFragment {
     private void initData() {
         UserBean userBean = new UserBean();
         if("111111".equals(UserInfoMessage.getUserId())){
-            userBean.setName(UserInfoMessage.getUserName());
-            userBean.setHeaderIcon(UserInfoMessage.getUserIcon());
-        }else {
             userBean.setName("用户二");
             userBean.setHeaderIcon("http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg");
+        }else {
+            userBean.setName(UserInfoMessage.getUserName());
+            userBean.setHeaderIcon(UserInfoMessage.getUserIcon());
         }
         userBean.setLastMessage("你好，这是最后一条消息");
         userBean.setLsatMessageTime("2017-5-10");

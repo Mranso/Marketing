@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="2017-5-15"/>
+        android:textSize="12sp"
+        android:textColor="@color/tab_content_text_normal"/>
 
     <ImageView
         android:id="@+id/chart_message_to_user_icon"
@@ -26,7 +27,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/mc_chart_text_message_right"
         android:layout_toLeftOf="@id/chart_message_to_user_icon"
-        android:text="你好，你好你好"
         android:textColor="@color/white"
         android:gravity="center"
         android:layout_marginTop="5dp"
@@ -34,6 +34,5 @@
         android:paddingRight="15dp"
         android:paddingLeft="10dp"
         android:layout_below="@id/chart_message_to_user_text_time"/>
-
 
 </RelativeLayout>
